@@ -8,30 +8,43 @@ https://hackaday.io/project/4613-arduino-mppt-solar-charge-controller
 https://web.archive.org/web/20130430163911/http://www.timnolan.com/index.php?page=arduino-ppt-solar-charger
 
 Atmel SAMD21
-https://github.com/adafruit/asf4
-https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf
-ATSAMD21G18A - 256K flash, 32k ram, 48pin TQFP, $3.20/ea
-ATSAMD21J18 - 256K flash, 32k ram, 64 pin TQFP, ~$3.40/ea
+    https://github.com/adafruit/asf4
+    https://cdn-shop.adafruit.com/product-files/2772/atmel-42181-sam-d21_datasheet.pdf
+    ATSAMD21G18A - 256K flash, 32k ram, 48pin TQFP, $3.20/ea
+    ATSAMD21J18 - 256K flash, 32k ram, 64 pin TQFP, $3.40/ea
 
-https://learn.adafruit.com/how-to-program-samd-bootloaders/overview
-U2F bootloader (probably not useful): https://learn.adafruit.com/adafruit-metro-m4-express-featuring-atsamd51/uf2-bootloader-details
+    https://learn.adafruit.com/how-to-program-samd-bootloaders/overview
+    U2F bootloader (probably not useful): https://learn.adafruit.com/adafruit-metro-m4-express-featuring-atsamd51/uf2-bootloader-details
 
-I2C is through a "SERCOM" Serial Communication Interface https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports
-The G and J version have 6 of these SERCOMs, the E version only has 4
+    I2C is through a "SERCOM" Serial Communication Interface https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports
+    The G and J version have 6 of these SERCOMs, the E version only has 4
 
-1.62V – 3.63V operating voltage
+    1.62V – 3.63V operating voltage
 
-Feather M0 using the SAMD21:
-https://www.adafruit.com/product/2772
-Schematic: https://cdn-learn.adafruit.com/assets/assets/000/028/801/original/adafruit_products_M0SCHEM.png
-Board layout: https://cdn-learn.adafruit.com/assets/assets/000/028/802/original/adafruit_products_m0fab.png
-Github with eagle files: https://github.com/adafruit/Adafruit-Feather-M0-Basic-Proto-PCB
+    Feather M0 using the SAMD21:
+    https://www.adafruit.com/product/2772
+    Schematic: https://cdn-learn.adafruit.com/assets/assets/000/028/801/original/adafruit_products_M0SCHEM.png
+    Board layout: https://cdn-learn.adafruit.com/assets/assets/000/028/802/original/adafruit_products_m0fab.png
+    Github with eagle files: https://github.com/adafruit/Adafruit-Feather-M0-Basic-Proto-PCB
 
-SMD SWD header: FTSH-105-01-L-DV-007-K
-THT SWD header: FTSH-105-01-L-D-007-K
-pinout: https://test.embeetle.com/#hardware/probe-conn/10pin-cortex-db
+    SMD SWD header: FTSH-105-01-L-DV-007-K
+    THT SWD header: FTSH-105-01-L-D-007-K
+    pinout: https://test.embeetle.com/#hardware/probe-conn/10pin-cortex-db
 
-PWM: http://shawnhymel.com/1710/arduino-zero-samd21-raw-pwm-using-cmsis/
+    PWM: http://shawnhymel.com/1710/arduino-zero-samd21-raw-pwm-using-cmsis/
+
+    Current requirement:
+        CPU running at more or less max at a higher temp is about 7mA absolute worst case
+        I2C running in standard mode requires 3mA worst case to output a low
+        Other peripherals (FET PWM, etc) are probably under a couple mA.
+        Status LEDs? probably a good idea to add two or three. 1mA each
+        Total: 7+3+3+3 = 16mA for the micro and LEDs
+
+Status LEDs:
+    about 1.8V Vf at 1mA for yellow and green
+    3.3V supply
+    (3.3V-1.8V)/0.001 = 1.5k
+
 
 Current/Voltage Monitor:
     INA233
@@ -54,9 +67,18 @@ Current/Voltage Monitor:
             The faster we want the bus the lower the pull up resistors should be
             1.5k is a pretty good value that I have
 
+        Seems like 1.5k may be a bit too strong of a pull up:
+        https://learn.sparkfun.com/tutorials/i2c/i2c-at-the-hardware-level
+        Most people go with 4.7k to 10k as a first guess
+        It is likely that the Cb value of 400pF is way, way too high for this situation
+
+    Current requirement:
+        310uA typical for each
+        Let's say 1mA for the two of them
+
 solar panel
 https://github.com/VoltaicEngineering/Solar-Panel-Drawings/blob/master/Voltaic%20Systems%202W%206V%20112x136mm%20DRAWING%20CURRENT%202017%207%2020.pdf
-~2W max
+about 2W max
 Isc = 370mA
 Imp = 340mA
 Voc = 7.7V
@@ -70,7 +92,7 @@ Switching transistor:
     BSS806NE
     N-Channel fet, good for low side switching, not so good for high side (which is what is needed for a buck converter)
     Can use a fet controller to still use this
-    ~40mOhm with 2.5Vgs
+    about 40mOhm with 2.5Vgs
     With max current of 370mA from solar panel power dissipation of .37^2 * .04 = 5.5mW dissipation
     
     http://www.vishay.com/docs/63199/si2365eds.pdf
@@ -156,3 +178,19 @@ Buck converter
 
     Use 16SVPF270M (270uF, 16V, 0.022Ohm ESR) for bulk capacitance
     Use EMK212ABJ106MG-T (10uF, 16V ceramic) to reduce ESR ripple
+
+
+3.3V Rail:
+    16mA for micro and LEDS
+    1mA for the INA233s together
+    3mA for I2C drive current
+
+    Total around 20mA max
+
+    LT3080 drives 10uA through a resistor to generate a reference voltage for output
+    3.3V = R*10uA => R = 330k
+
+    2.2uF low ESR cap minimum output for LT3080
+
+Curiosity board/PIC16F1619:
+    Run as I2C slave mode: https://www.microchip.com/forums/m920858.aspx
