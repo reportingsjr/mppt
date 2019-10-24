@@ -4,9 +4,9 @@ EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
+Title "PV Maximum Power Point Tracker"
+Date "2019-10-23"
+Rev "1"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -1638,4 +1638,48 @@ Wire Wire Line
 Connection ~ 9240 3170
 Wire Wire Line
 	9240 3170 9280 3170
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 5DB201BC
+P 12000 3600
+F 0 "H1" H 12100 3646 50  0000 L CNN
+F 1 "MountingHole" H 12100 3555 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 12000 3600 50  0001 C CNN
+F 3 "~" H 12000 3600 50  0001 C CNN
+	1    12000 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 5DB20529
+P 12000 3800
+F 0 "H2" H 12100 3846 50  0000 L CNN
+F 1 "MountingHole" H 12100 3755 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 12000 3800 50  0001 C CNN
+F 3 "~" H 12000 3800 50  0001 C CNN
+	1    12000 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5DB208D6
+P 12000 4000
+F 0 "H3" H 12100 4046 50  0000 L CNN
+F 1 "MountingHole" H 12100 3955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 12000 4000 50  0001 C CNN
+F 3 "~" H 12000 4000 50  0001 C CNN
+	1    12000 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 5DB20BBD
+P 12000 4200
+F 0 "H4" H 12100 4246 50  0000 L CNN
+F 1 "MountingHole" H 12100 4155 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 12000 4200 50  0001 C CNN
+F 3 "~" H 12000 4200 50  0001 C CNN
+	1    12000 4200
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
