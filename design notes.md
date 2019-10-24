@@ -122,6 +122,10 @@ Gate drivers (maybe not necessary):
         About 2mA max supply current
         $0.93/ea
 
+        Cboot > Qgs/deltaVboot
+        Cboot = 3nC/5V = 600pF (a lower cap value is ok, higher and we're pushing the limits of the BSS806N)
+        Cboot = 3nC/3V = 1nF
+
 MPPT Algorithm
 Peturb and observe flowchart:
 https://microcontrolere.files.wordpress.com/2019/03/po-algorithm.png
@@ -184,6 +188,14 @@ Buck converter
 
     Use 16SVPF270M (270uF, 16V, 0.022Ohm ESR) for bulk capacitance
     Use EMK212ABJ106MG-T (10uF, 16V ceramic) to reduce ESR ripple
+
+    Cin to smooth the current drawn from the solar panel:
+        Page 16 of https://shodhganga.inflibnet.ac.in/bitstream/10603/43046/8/08_chapter3.pdf
+        Cin = Ipv*Ton/deltaVc
+        Ipv = about 400mA max
+        Ton = 1/50kHz worst case = 20us
+        A reasonable deltaVc (ripple voltage) is probably 100mV?
+        Cin = (.4A*20us)/.1V = 80uF
 
 
 3.3V Rail:
