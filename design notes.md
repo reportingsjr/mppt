@@ -77,15 +77,12 @@ Current/Voltage Monitor:
         Let's say 1mA for the two of them
 
 solar panel
-https://github.com/VoltaicEngineering/Solar-Panel-Drawings/blob/master/Voltaic%20Systems%202W%206V%20112x136mm%20DRAWING%20CURRENT%202017%207%2020.pdf
-about 2W max
-Isc = 370mA
-Imp = 340mA
-Voc = 7.7V
-Vmp = 6.5V
-
-
-Protect panel with a 0.5A - 1A polyfuse and a 8-10V TVS
+    https://github.com/VoltaicEngineering/Solar-Panel-Drawings/blob/master/Voltaic%20Systems%202W%206V%20112x136mm%20DRAWING%20CURRENT%202017%207%2020.pdf
+    about 2W max
+    Isc = 370mA
+    Imp = 340mA
+    Voc = 7.7V
+    Vmp = 6.5V
 
 Switching transistor:
     https://datasheet.octopart.com/BSS806NEH6327XTSA1-Infineon-datasheet-47941179.pdf
@@ -115,6 +112,15 @@ Gate drivers (maybe not necessary):
     Look for gate drivers that are 5V powered.
     There are almost no lower cost options for 3.3V.
     This will require a 5V boost converter from the SMPS/battery, but this is useful for powering the curiosity dev board anyhow.
+
+    PX3519XTMA1
+        5V supply
+        can drive up to 3nF gate capacitance
+        Synchronous buck, so has two NFET drivers with auto deadtime adjustments
+        Bootstrap cap can provide gate voltages of up to 9V above high side FET source
+        Works with a 3.3V PWM input
+        About 2mA max supply current
+        $0.93/ea
 
 MPPT Algorithm
 Peturb and observe flowchart:
