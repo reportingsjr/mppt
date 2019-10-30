@@ -418,7 +418,7 @@ F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/SAMD21-Family-DataSheet-DS4
 	1    0    0    -1  
 $EndComp
 $Comp
-L mppt_power_controller-rescue:INA233-Analog_ADC U1
+L Analog_ADC:INA233 U1
 U 1 1 5DAF74FD
 P 3620 2200
 F 0 "U1" H 3320 2730 50  0000 C CNN
@@ -532,7 +532,7 @@ Wire Wire Line
 Wire Wire Line
 	9060 1700 9060 1640
 $Comp
-L mppt_power_controller-rescue:INA233-Analog_ADC U4
+L Analog_ADC:INA233 U4
 U 1 1 5DB0D624
 P 9060 2200
 F 0 "U4" H 8760 2730 50  0000 C CNN
