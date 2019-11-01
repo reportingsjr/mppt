@@ -1,4 +1,4 @@
-update=Fri 01 Nov 2019 03:52:29 PM EDT
+update=Fri 01 Nov 2019 05:15:06 PM EDT
 version=1
 last_client=kicad
 [general]
@@ -27,7 +27,7 @@ AllowMicroVias=0
 AllowBlindVias=0
 RequireCourtyardDefinitions=0
 ProhibitOverlappingCourtyards=1
-MinTrackWidth=0.2
+MinTrackWidth=0.13
 MinViaDiameter=0.4
 MinViaDrill=0.3
 MinMicroViaDiameter=0.2
@@ -72,8 +72,8 @@ OthersTextSizeH=1
 OthersTextSizeThickness=0.15
 OthersTextItalic=0
 OthersTextUpright=0
-SolderMaskClearance=0.051
-SolderMaskMinWidth=0.25
+SolderMaskClearance=0
+SolderMaskMinWidth=0
 SolderPasteClearance=0
 SolderPasteRatio=-0
 [pcbnew/Layer.F.Cu]

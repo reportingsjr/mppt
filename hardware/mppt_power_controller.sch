@@ -31,13 +31,13 @@ Microcontroller
 $Comp
 L Connector:Conn_01x02_Female J1
 U 1 1 5DAA0A41
-P 1150 3270
-F 0 "J1" H 1042 2945 50  0000 C CNN
-F 1 "Solar Input" H 1042 3036 50  0000 C CNN
-F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 1150 3270 50  0001 C CNN
-F 3 "~" H 1150 3270 50  0001 C CNN
-	1    1150 3270
-	-1   0    0    1   
+P 1150 3170
+F 0 "J1" H 1042 2845 50  0000 C CNN
+F 1 "Solar Input" H 1042 2936 50  0000 C CNN
+F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 1150 3170 50  0001 C CNN
+F 3 "~" H 1150 3170 50  0001 C CNN
+	1    1150 3170
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:L_Small L1
