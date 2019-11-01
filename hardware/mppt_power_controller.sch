@@ -1674,7 +1674,7 @@ F 3 "~" H 4570 4270 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Driver_FET:PX3519 U2
+L mppt_power_controller-rescue:PX3519-Driver_FET U2
 U 1 1 5DB16487
 P 3690 4470
 F 0 "U2" H 3320 4870 39  0000 C CNN
