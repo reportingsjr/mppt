@@ -261,7 +261,7 @@ $Comp
 L Device:R_Small R11
 U 1 1 5DAD26E1
 P 11480 6730
-F 0 "R11" H 11350 6760 50  0000 L CNN
+F 0 "R11" H 11280 6760 50  0000 L CNN
 F 1 "1.87M" H 11210 6680 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 11480 6730 50  0001 C CNN
 F 3 "" H 11480 6730 50  0001 C CNN
@@ -616,7 +616,7 @@ $EndComp
 Wire Wire Line
 	8430 3170 8570 3170
 Wire Wire Line
-	8570 3170 9240 3170
+	8570 3170 8830 3170
 Connection ~ 8570 3170
 NoConn ~ 9460 2500
 NoConn ~ 4020 2500
@@ -1370,66 +1370,6 @@ Text Label 3900 7310 2    50   ~ 0
 FET_PWM
 Text Label 3900 7410 2    50   ~ 0
 FET_ENABLE
-$Comp
-L Connector:TestPoint TP3
-U 1 1 5DB2BA0C
-P 13400 1950
-F 0 "TP3" H 13458 2068 50  0000 L CNN
-F 1 "SDA" H 13458 1977 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 13600 1950 50  0001 C CNN
-F 3 "~" H 13600 1950 50  0001 C CNN
-F 4 "Keystone 5019" H 13400 1950 50  0001 C CNN "P/N"
-	1    13400 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP4
-U 1 1 5DB2D1C2
-P 13670 1950
-F 0 "TP4" H 13728 2068 50  0000 L CNN
-F 1 "SCL" H 13728 1977 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 13870 1950 50  0001 C CNN
-F 3 "~" H 13870 1950 50  0001 C CNN
-F 4 "Keystone 5019" H 13670 1950 50  0001 C CNN "P/N"
-	1    13670 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP5
-U 1 1 5DB2D5E3
-P 13950 1950
-F 0 "TP5" H 14008 2068 50  0000 L CNN
-F 1 "5V" H 14008 1977 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 14150 1950 50  0001 C CNN
-F 3 "~" H 14150 1950 50  0001 C CNN
-F 4 "Keystone 5019" H 13950 1950 50  0001 C CNN "P/N"
-	1    13950 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP6
-U 1 1 5DB2D95C
-P 14220 1950
-F 0 "TP6" H 14278 2068 50  0000 L CNN
-F 1 "3.3V" H 14278 1977 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 14420 1950 50  0001 C CNN
-F 3 "~" H 14420 1950 50  0001 C CNN
-F 4 "Keystone 5019" H 14220 1950 50  0001 C CNN "P/N"
-	1    14220 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP7
-U 1 1 5DB2DC57
-P 14510 1950
-F 0 "TP7" H 14568 2068 50  0000 L CNN
-F 1 "GND" H 14568 1977 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 14710 1950 50  0001 C CNN
-F 3 "~" H 14710 1950 50  0001 C CNN
-F 4 "Keystone 5019" H 14510 1950 50  0001 C CNN "P/N"
-	1    14510 1950
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	13400 2000 13400 1950
 Wire Wire Line
@@ -1451,18 +1391,6 @@ Wire Wire Line
 Wire Wire Line
 	14510 2400 14510 1950
 Connection ~ 13300 2400
-$Comp
-L Connector:TestPoint TP1
-U 1 1 5DB2E7FF
-P 1560 3110
-F 0 "TP1" H 1618 3228 50  0000 L CNN
-F 1 "Solar" H 1618 3137 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 1760 3110 50  0001 C CNN
-F 3 "~" H 1760 3110 50  0001 C CNN
-F 4 "Keystone 5019" H 1560 3110 50  0001 C CNN "P/N"
-	1    1560 3110
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1560 3110 1560 3170
 Connection ~ 1560 3170
@@ -1695,10 +1623,10 @@ Wire Wire Line
 Wire Wire Line
 	1550 3270 1550 3370
 $Comp
-L power:GND #PWR?
+L power:GND #PWR026
 U 1 1 5DB30CA4
 P 3700 3540
-F 0 "#PWR?" H 3700 3290 50  0001 C CNN
+F 0 "#PWR026" H 3700 3290 50  0001 C CNN
 F 1 "GND" H 3705 3367 50  0000 C CNN
 F 2 "" H 3700 3540 50  0001 C CNN
 F 3 "" H 3700 3540 50  0001 C CNN
@@ -1712,4 +1640,111 @@ Wire Wire Line
 Connection ~ 3700 3170
 Wire Wire Line
 	3700 3170 4100 3170
+Wire Notes Line
+	5770 3080 5770 3120
+Wire Notes Line
+	5770 3120 6370 3120
+Wire Notes Line
+	6370 3120 6370 4110
+Wire Notes Line
+	6370 4110 5280 4110
+Wire Notes Line
+	5280 4110 5280 3390
+Wire Notes Line
+	5280 3390 4110 3390
+Wire Notes Line
+	4110 3390 4110 3080
+Wire Notes Line
+	4110 3080 5770 3080
+Text Notes 5320 4280 0    39   ~ 0
+Keep these components connected\nwith short, wide traces.
+Wire Wire Line
+	8830 3110 8830 3170
+Connection ~ 8830 3170
+Wire Wire Line
+	8830 3170 9240 3170
+$Comp
+L Connector:TestPoint TP7
+U 1 1 5DB2DC57
+P 14510 1950
+F 0 "TP7" H 14568 2068 50  0000 L CNN
+F 1 "GND" H 14568 1977 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 14710 1950 50  0001 C CNN
+F 3 "~" H 14710 1950 50  0001 C CNN
+F 4 "Keystone 5019" H 14510 1950 50  0001 C CNN "P/N"
+	1    14510 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP6
+U 1 1 5DB2D95C
+P 14220 1950
+F 0 "TP6" H 14278 2068 50  0000 L CNN
+F 1 "3.3V" H 14278 1977 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 14420 1950 50  0001 C CNN
+F 3 "~" H 14420 1950 50  0001 C CNN
+F 4 "Keystone 5019" H 14220 1950 50  0001 C CNN "P/N"
+	1    14220 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP5
+U 1 1 5DB2D5E3
+P 13950 1950
+F 0 "TP5" H 14008 2068 50  0000 L CNN
+F 1 "5V" H 14008 1977 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 14150 1950 50  0001 C CNN
+F 3 "~" H 14150 1950 50  0001 C CNN
+F 4 "Keystone 5019" H 13950 1950 50  0001 C CNN "P/N"
+	1    13950 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP4
+U 1 1 5DB2D1C2
+P 13670 1950
+F 0 "TP4" H 13728 2068 50  0000 L CNN
+F 1 "SCL" H 13728 1977 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 13870 1950 50  0001 C CNN
+F 3 "~" H 13870 1950 50  0001 C CNN
+F 4 "Keystone 5019" H 13670 1950 50  0001 C CNN "P/N"
+	1    13670 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP3
+U 1 1 5DB2BA0C
+P 13400 1950
+F 0 "TP3" H 13458 2068 50  0000 L CNN
+F 1 "SDA" H 13458 1977 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 13600 1950 50  0001 C CNN
+F 3 "~" H 13600 1950 50  0001 C CNN
+F 4 "Keystone 5019" H 13400 1950 50  0001 C CNN "P/N"
+	1    13400 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5DB2E7FF
+P 1560 3110
+F 0 "TP1" H 1618 3228 50  0000 L CNN
+F 1 "Solar" H 1618 3137 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 1760 3110 50  0001 C CNN
+F 3 "~" H 1760 3110 50  0001 C CNN
+F 4 "Keystone 5019" H 1560 3110 50  0001 C CNN "P/N"
+	1    1560 3110
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP8
+U 1 1 5DBCB834
+P 8830 3110
+F 0 "TP8" H 8830 3435 50  0000 C CNN
+F 1 "Battery" H 8830 3344 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Keystone_5019_Minature" H 9030 3110 50  0001 C CNN
+F 3 "~" H 9030 3110 50  0001 C CNN
+F 4 "Keystone 5019" H 8830 3110 50  0001 C CNN "P/N"
+	1    8830 3110
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
