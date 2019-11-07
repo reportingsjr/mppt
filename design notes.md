@@ -157,7 +157,7 @@ Buck converter
     D = Vout/Vin = 0.7
     Lmin = (1-D)R/2f = 0.3*8.4/100000 = 25.2uH
 
-    33.75uH > 25.2uH, so use anything greater than 33.75uH
+    33.75uH > 25.2uH, so use anything gretaer than 33.75uH
     I have PM3316-151M-RC stocked which is 150uH and good up to 800mA, way more than enough! 540mOhm of series resistance though.
 
     Capacitor selection:
