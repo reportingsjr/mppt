@@ -1178,17 +1178,17 @@ D-
 Text Label 3900 8810 2    39   ~ 0
 D+
 Wire Wire Line
-	3900 6710 4030 6710
+	3900 7110 4030 7110
 Wire Wire Line
-	4030 6810 3900 6810
-Text Label 3900 6710 2    39   ~ 0
+	4030 7210 3900 7210
+Text Label 3900 7110 2    39   ~ 0
 SDA
-Text Label 3900 6810 2    39   ~ 0
+Text Label 3900 7210 2    39   ~ 0
 SCL
-Text Notes 3670 6710 2    39   ~ 0
-SERCOM0.0
-Text Notes 3670 6810 2    39   ~ 0
-SERCOM0.1
+Text Notes 3670 7110 2    39   ~ 0
+SERCOM2.0
+Text Notes 3670 7210 2    39   ~ 0
+SERCOM2.1
 Text Label 13200 2000 0    39   ~ 0
 SDA
 Text Label 13200 2100 0    39   ~ 0
@@ -1417,8 +1417,6 @@ NoConn ~ 4030 6510
 NoConn ~ 4030 6610
 NoConn ~ 4030 6910
 NoConn ~ 4030 7010
-NoConn ~ 4030 7110
-NoConn ~ 4030 7210
 NoConn ~ 4030 7510
 NoConn ~ 4030 7610
 NoConn ~ 4030 7710
@@ -1747,4 +1745,6 @@ F 4 "Keystone 5019" H 8830 3110 50  0001 C CNN "P/N"
 	1    8830 3110
 	1    0    0    -1  
 $EndComp
+NoConn ~ 4030 6710
+NoConn ~ 4030 6810
 $EndSCHEMATC
