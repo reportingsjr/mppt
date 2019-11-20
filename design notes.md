@@ -31,7 +31,19 @@ Atmel SAMD21
     THT SWD header: FTSH-105-01-L-D-007-K
     pinout: https://test.embeetle.com/#hardware/probe-conn/10pin-cortex-db
 
-    PWM: http://shawnhymel.com/1710/arduino-zero-samd21-raw-pwm-using-cmsis/
+    PWM:
+        http://shawnhymel.com/1710/arduino-zero-samd21-raw-pwm-using-cmsis/
+
+        Using TCC for PWM
+            The counter frequency is GCLK/(N * PER) where N is the prescaler division and PER is the max value to 
+            count up to (wraps around from max value to 0)
+            E.g. if there is no prescaler N = 1. The value of PER will also dictate duty cycle resolution
+            To have at least 1000 duty cycle divisions PER must be at least 1000
+            With an 8MHz GCLK the counter freq will then be 8MHz/(1*1024) = 8KHz
+            Vice Versa, if you want a 50kHz counter freq then 50kHz = 8MHz/PER
+            PER then equals 160
+
+            For a 48MHz GCLK a 50kHz counter freq would result from PER of 960
 
     Current requirement:
         CPU running at more or less max at a higher temp is about 7mA absolute worst case

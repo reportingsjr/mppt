@@ -460,7 +460,7 @@ Wire Wire Line
 Wire Wire Line
 	4250 1900 4250 1930
 Text Notes 3940 1790 0    39   ~ 0
-Address 1000000
+Address 1000000 (0x40)
 $Comp
 L Device:R_Small R1
 U 1 1 5DAFEC07
@@ -596,7 +596,7 @@ Wire Wire Line
 Text Label 7810 1630 0    50   ~ 0
 3.3V
 Text Notes 9450 1880 0    39   ~ 0
-Address 1000001
+Address 1000001 (0x41)
 Wire Wire Line
 	7810 1900 7810 1940
 Text Label 9060 1640 0    50   ~ 0
