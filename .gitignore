@@ -24,3 +24,8 @@ fp-info-cache
 # Exported BOM files
 *.xml
 *.csv
+
+# atmel studio built files
+power_firmware/MyProject/Debug/*
+# keep the elf file only
+!power_firmware/MyProject/Debug/power_firmware.elf
