@@ -23,7 +23,7 @@ float get_current(uint8_t address, float current_lsb) {
 	i2c_m_sync_cmd_read(&I2C_0, 0x89, &buffer, sizeof(buffer));
 
 	// This calculation assumes that no shifting was used to prevent rounding errors.
-	return (((uint16_t) buffer[1]) << 8 + buffer[0])*current_lsb;
+	return ((float) (((uint16_t) buffer[1]) << 8 + buffer[0]))*current_lsb;
 }
 
 // max_current_expected: max current in Amps
@@ -38,24 +38,7 @@ uint16_t calc_current_calibration(float max_current_expected, float r_shunt) {
 }
 
 void set_current_calibration(uint8_t address, uint16_t calibration) {
-	uint8_t buffer[3];
-
-	// register address
-	buffer[0] = 0xD4;
-	// lop off the MSB and store the LSB in the first spot
-	buffer[1] = (uint8_t) calibration;
-	// shift the MSB down and store it in the second spot
-	buffer[2] = (uint8_t) (calibration >> 8);
-
-	//i2c_m_sync_set_slaveaddr(&I2C_0, address, I2C_M_SEVEN);
-	//i2c_m_sync_cmd_write(&I2C_0, 0xD4, buffer, sizeof(buffer));
-	struct _i2c_m_msg temp;
-	temp.addr = address;
-	temp.flags = I2C_M_SEVEN | I2C_M_STOP;
-	temp.len = 3;
-	temp.buffer = &buffer;
-
-	_i2c_m_sync_transfer(&I2C_0, &temp);
+	write_register_word(address, 0xD4, calibration);
 }
 
 // Doesn't really do anything other than have the IC return 0xB0
@@ -69,6 +52,51 @@ uint8_t get_capability(uint8_t address) {
 }
 
 void clear_faults(uint8_t address) {
-		i2c_m_sync_set_slaveaddr(&I2C_0, address, I2C_M_SEVEN);
-		i2c_m_sync_cmd_write(&I2C_0, 0x03, 0, 1);
+		write_register_byte(address, 0x03, 0);
+}
+
+void write_register_byte(uint8_t address, uint8_t register_address, uint8_t data) {
+	// i2c_m_sync_cmd_write cannot be used to write the INA233's registers
+	// as the IC expects the register address and data byte(s) to be sent
+	// in one I2C/PMBus transfer. i2c_m_sync_cmd_write sends the register address
+	// as its own transfer and then the data as its own.
+
+	uint8_t temp_buffer[2];
+
+	// register address
+	temp_buffer[0] = register_address;
+	// lop off the MSB and store the LSB in the first spot
+	temp_buffer[1] = data;
+
+	struct _i2c_m_msg temp;
+	temp.addr = address;
+	temp.flags = I2C_M_SEVEN | I2C_M_STOP;
+	temp.len = 2;
+	temp.buffer = &temp_buffer;
+
+	_i2c_m_sync_transfer(&I2C_0, &temp);
+}
+
+void write_register_word(uint8_t address, uint8_t register_address, uint16_t data) {
+	// i2c_m_sync_cmd_write cannot be used to write the INA233's registers
+	// as the IC expects the register address and data byte(s) to be sent
+	// in one I2C/PMBus transfer. i2c_m_sync_cmd_write sends the register address
+	// as its own transfer and then the data as its own.
+
+	uint8_t temp_buffer[3];
+
+	// register address
+	temp_buffer[0] = register_address;
+	// lop off the MSB and store the LSB in the first spot
+	temp_buffer[1] = (uint8_t) data;
+	// shift the MSB down and store it in the second spot
+	temp_buffer[2] = (uint8_t) (data >> 8);
+
+	struct _i2c_m_msg temp;
+	temp.addr = address;
+	temp.flags = I2C_M_SEVEN | I2C_M_STOP;
+	temp.len = 3;
+	temp.buffer = &temp_buffer;
+
+	_i2c_m_sync_transfer(&I2C_0, &temp);
 }
