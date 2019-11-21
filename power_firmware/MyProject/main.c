@@ -10,12 +10,7 @@ int main(void)
 	pwm_set_parameters(&PWM_0, 160, 80);
 	pwm_enable(&PWM_0);
 
-	struct io_descriptor *I2C_0_io;
-	i2c_m_sync_get_io_descriptor(&I2C_0, &I2C_0_io);
-
 	i2c_m_sync_enable(&I2C_0);
-	i2c_m_sync_set_slaveaddr(&I2C_0, 0x40, I2C_M_SEVEN);
-	i2c_m_sync_cmd_write(&I2C_0, 0x03, (uint8_t *)"Test", 4);
 
 	delay_init(SysTick);
 
@@ -24,17 +19,18 @@ int main(void)
 	// enable the FET driver
 	gpio_set_pin_level(fet_enable, true);
 
-	/* Replace with your application code */
+	// 3.2768A gives a resolution of 100uA per bit
+	// current_lsb = 0.0001
+	uint16_t current_calibration = calc_current_calibration(3.2768, 0.01);
+	set_current_calibration(0x40, current_calibration);
+	set_current_calibration(0x41, current_calibration);
+
 	while (1) {
-		i2c_m_sync_set_slaveaddr(&I2C_0, 0x40, I2C_M_SEVEN);
-		// clear faults
-		i2c_m_sync_cmd_write(&I2C_0, 0x03, 0, 1);
-		// retrieve "capability"
-		uint8_t buffer;
-		i2c_m_sync_cmd_read(&I2C_0, 0x19, &buffer, sizeof(buffer));
-		
-		volatile float voltage1 = read_voltage(0x40);
-		volatile float voltage2 = read_voltage(0x41);
+		volatile float current1 = get_current(0x40);
+		volatile float current2 = get_current(0x41);
+
+		volatile float voltage1 = get_voltage(0x40);
+		volatile float voltage2 = get_voltage(0x41);
 		
 		
 		delay_ms(1);
