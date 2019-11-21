@@ -107,7 +107,7 @@ int16_t convert_signed_2s_complement(uint8_t msb, uint8_t lsb) {
 	int16_t return_value;
 
 	// If the most significant bit is set this is a negative number
-	if(0x8000 & decombobulated_value == 0x8000) {
+	if((0x8000 & decombobulated_value) == 0x8000) {
 		return_value = (~decombobulated_value) + 1;
 		return_value = return_value*-1;
 		return return_value;
