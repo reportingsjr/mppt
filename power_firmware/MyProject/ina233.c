@@ -55,7 +55,7 @@ void set_current_calibration(uint8_t address, uint16_t calibration) {
 	temp.len = 3;
 	temp.buffer = &buffer;
 
-	ret = _i2c_m_sync_transfer(&I2C_0->device, &temp);
+	_i2c_m_sync_transfer(&I2C_0, &temp);
 }
 
 // Doesn't really do anything other than have the IC return 0xB0
