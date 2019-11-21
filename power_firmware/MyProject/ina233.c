@@ -1,3 +1,4 @@
+#include <atmel_start.h>
 #include "ina233.h"
 
 float read_voltage(uint8_t address) {
