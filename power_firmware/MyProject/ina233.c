@@ -22,10 +22,8 @@ float get_current(uint8_t address, float current_lsb) {
 	i2c_m_sync_set_slaveaddr(&I2C_0, address, I2C_M_SEVEN);
 	i2c_m_sync_cmd_read(&I2C_0, 0x89, &buffer, sizeof(buffer));
 
-	volatile uint16_t decombobulated_value = ((uint16_t) buffer[1] << 8) + buffer[0];
-	volatile float ret = decombobulated_value*current_lsb;
-
 	// This calculation assumes that no shifting was used to prevent rounding errors.
+	float ret = convert_signed_2s_complement(buffer[1], buffer[0])*current_lsb;
 	return ret;
 }
 
@@ -102,4 +100,20 @@ void write_register_word(uint8_t address, uint8_t register_address, uint16_t dat
 	temp.buffer = &temp_buffer;
 
 	_i2c_m_sync_transfer(&I2C_0, &temp);
+}
+
+int16_t convert_signed_2s_complement(uint8_t msb, uint8_t lsb) {
+	uint16_t decombobulated_value = ((uint16_t) buffer[1] << 8) + buffer[0];
+	int16_t return_value;
+
+	// If the most significant bit is set this is a negative number
+	if(0x8000 & decombobulated_value == 1) {
+		return_value = (~decombobulated_value) + 1;
+		return_value = return_value*-1;
+		return return_value;
+	}
+
+	// otherwise it is positive and we don't do anything except cast it
+	return_value = (int16_t) decombobulated_value;
+	return return_value;
 }
