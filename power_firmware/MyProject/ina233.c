@@ -103,7 +103,7 @@ void write_register_word(uint8_t address, uint8_t register_address, uint16_t dat
 }
 
 int16_t convert_signed_2s_complement(uint8_t msb, uint8_t lsb) {
-	uint16_t decombobulated_value = ((uint16_t) buffer[1] << 8) + buffer[0];
+	uint16_t decombobulated_value = ((uint16_t) msb << 8) + lsb;
 	int16_t return_value;
 
 	// If the most significant bit is set this is a negative number
