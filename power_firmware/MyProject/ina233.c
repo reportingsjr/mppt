@@ -117,3 +117,15 @@ int16_t convert_signed_2s_complement(uint8_t msb, uint8_t lsb) {
 	return_value = (int16_t) decombobulated_value;
 	return return_value;
 }
+
+// see header files for defines to pass to this function
+void set_adc_config(uint8_t address, uint8_t samples_average, uint8_t bus_v_conv_time, uint8_t shunt_v_conv_time, uint8_t mode) {
+	uint16_t register_value = 0;
+
+	register_value = register_value | (samples_average << 9);
+	register_value = register_value | (bus_v_conv_time << 6);
+	register_value = register_value | (shunt_v_conv_time << 3);
+	register_value = register_value | mode;
+
+	write_register_word(address, 0xD0, return_value);
+}
