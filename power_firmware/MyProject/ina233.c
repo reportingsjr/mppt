@@ -38,14 +38,24 @@ uint16_t calc_current_calibration(float max_current_expected, float r_shunt) {
 }
 
 void set_current_calibration(uint8_t address, uint16_t calibration) {
-	uint8_t buffer[2];
-	// lop off the MSB and store the LSB in the first spot
-	buffer[0] = (uint8_t) calibration;
-	// shift the MSB down and store it in the second spot
-	buffer[1] = (uint8_t) (calibration >> 8);
+	uint8_t buffer[3];
 
-	i2c_m_sync_set_slaveaddr(&I2C_0, address, I2C_M_SEVEN);
-	i2c_m_sync_cmd_write(&I2C_0, 0xD4, buffer, sizeof(buffer));
+	// register address
+	buffer[0] = 0xD4;
+	// lop off the MSB and store the LSB in the first spot
+	buffer[1] = (uint8_t) calibration;
+	// shift the MSB down and store it in the second spot
+	buffer[2] = (uint8_t) (calibration >> 8);
+
+	//i2c_m_sync_set_slaveaddr(&I2C_0, address, I2C_M_SEVEN);
+	//i2c_m_sync_cmd_write(&I2C_0, 0xD4, buffer, sizeof(buffer));
+	struct _i2c_m_msg temp;
+	temp.addr = address;
+	temp.flags = I2C_M_SEVEN | I2C_M_STOP;
+	temp.len = 3;
+	temp.buffer = &buffer;
+
+	ret = _i2c_m_sync_transfer(&I2C_0->device, &temp);
 }
 
 // Doesn't really do anything other than have the IC return 0xB0

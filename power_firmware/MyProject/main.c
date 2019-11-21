@@ -14,8 +14,8 @@ int main(void)
 
 	delay_init(SysTick);
 
-	// Wait for 500ms after start up to enable to FET driver to make sure the 5V rail is fully powered up
-	delay_ms(500);
+	// Wait for 100ms after start up to enable to FET driver to make sure the 5V rail is fully powered up
+	delay_ms(100);
 	// enable the FET driver
 	gpio_set_pin_level(fet_enable, true);
 
