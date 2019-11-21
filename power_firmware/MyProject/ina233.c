@@ -18,12 +18,12 @@ float get_voltage(uint8_t address) {
 }
 
 float get_current(uint8_t address, float current_lsb) {
-	buffer[2];
+	uint8_t buffer[2];
 	i2c_m_sync_set_slaveaddr(&I2C_0, address, I2C_M_SEVEN);
 	i2c_m_sync_cmd_read(&I2C_0, 0x89, &buffer, sizeof(buffer));
 
 	// This calculation assumes that no shifting was used to prevent rounding errors.
-	return ((uint16_t) buffer[1] << 8 + buffer[0])*current_lsb;
+	return (((uint16_t) buffer[1]) << 8 + buffer[0])*current_lsb;
 }
 
 // max_current_expected: max current in Amps

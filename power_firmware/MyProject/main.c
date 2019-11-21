@@ -26,8 +26,8 @@ int main(void)
 	set_current_calibration(0x41, current_calibration);
 
 	while (1) {
-		volatile float current1 = get_current(0x40);
-		volatile float current2 = get_current(0x41);
+		volatile float current1 = get_current(0x40, 0.0001);
+		volatile float current2 = get_current(0x41, 0.0001);
 
 		volatile float voltage1 = get_voltage(0x40);
 		volatile float voltage2 = get_voltage(0x41);
