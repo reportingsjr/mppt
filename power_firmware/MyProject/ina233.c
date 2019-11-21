@@ -32,7 +32,7 @@ float get_current(uint8_t address, float current_lsb) {
 uint16_t calc_current_calibration(float max_current_expected, float r_shunt) {
 	// The formula for this is CAL = 0.00512/(current_lsb * Rshunt)
 	// current_lsb = max current expected/2^15
-	float current_lsb = max_current_expected/(2 << 15);
+	float current_lsb = max_current_expected/(1 << 15);
 	float cal = 0.00512/(current_lsb*r_shunt);
 	return (uint16_t) cal;
 }
