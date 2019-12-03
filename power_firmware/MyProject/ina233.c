@@ -1,3 +1,6 @@
+// Jon Neal 2019
+// Code available under MIT license
+
 #include <atmel_start.h>
 #include "ina233.h"
 
