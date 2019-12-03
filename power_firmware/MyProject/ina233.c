@@ -130,5 +130,5 @@ void set_adc_config(uint8_t address, uint8_t samples_average, uint8_t bus_v_conv
 	register_value = register_value | (shunt_v_conv_time << 3);
 	register_value = register_value | mode;
 
-	write_register_word(address, 0xD0, return_value);
+	write_register_word(address, 0xD0, register_value);
 }
