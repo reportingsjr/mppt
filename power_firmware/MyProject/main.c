@@ -101,7 +101,7 @@ int main(void)
 		gpio_toggle_pin_level(yellow_led);
 		gpio_toggle_pin_level(green_led);
 		// Add a small delay to limit possible oscillations and let things settle
-		delay_ms(2000);
+		delay_ms(1000);
 	}
 }
 
