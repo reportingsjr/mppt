@@ -52,5 +52,7 @@ hpl\sysctrl\hpl_sysctrl.c
 
 hpl\tcc\hpl_tcc.c
 
+ina233.c
+
 main.c
 

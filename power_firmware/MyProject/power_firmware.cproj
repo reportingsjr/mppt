@@ -689,6 +689,12 @@
     <Compile Include="hri\hri_wdt_d21.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ina233.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ina233.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
