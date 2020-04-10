@@ -10,12 +10,15 @@ int main(void)
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
 
-	pwm_set_parameters(&PWM_0, 10, 80);
-	pwm_enable(&PWM_0);
+	//pwm_set_parameters(&PWM_0, 10, 80);
+	//pwm_enable(&PWM_0);
 
 	i2c_m_sync_enable(&I2C_0);
 
 	delay_init(SysTick);
+
+	gpio_set_pin_level(yellow_led, true);
+	gpio_set_pin_level(green_led, false);
 
 	// TODO: When Nick completes the UI part uncomment this and fill in correct I2C address
 	// uint8_t ui_address = 0x42;
@@ -23,7 +26,7 @@ int main(void)
 	// Wait for 100ms after start up to enable to FET driver to make sure the 5V rail is fully powered up
 	delay_ms(100);
 	// enable the FET driver
-	gpio_set_pin_level(fet_enable, true);
+	//gpio_set_pin_level(fet_enable, true);
 
 	// 3.2768A gives a resolution of 100uA per bit
 	// current_lsb = 0.0001
@@ -39,7 +42,7 @@ int main(void)
 
 	while (1) {
 		// Read the current and voltage of the solar panel and multiply to get power 
-		float current = get_current(0x40, 0.0001);
+		/*float current = get_current(0x40, 0.0001);
 		float voltage = get_voltage(0x40);
 		current_power = current*voltage;
 
@@ -94,7 +97,9 @@ int main(void)
 		// TODO: When Nick completes the UI part uncomment this to send data over via I2C
 		//i2c_m_sync_set_slaveaddr(&I2C_0, ui_address, I2C_M_SEVEN);
 		//io_write(I2C_0_io, (uint8_t *)current_power), 1;
-
+		*/
+		gpio_toggle_pin_level(yellow_led);
+		gpio_toggle_pin_level(green_led);
 		// Add a small delay to limit possible oscillations and let things settle
 		delay_ms(5);
 	}
