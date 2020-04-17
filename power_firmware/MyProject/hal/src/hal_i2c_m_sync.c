@@ -42,7 +42,7 @@
 /**
  * \brief Sync version of I2C I/O read
  */
-static int32_t i2c_m_sync_read(struct io_descriptor *io, uint8_t *buf, const uint16_t n)
+int32_t i2c_m_sync_read(struct io_descriptor *io, uint8_t *buf, const uint16_t n)
 {
 	struct i2c_m_sync_desc *i2c = CONTAINER_OF(io, struct i2c_m_sync_desc, io);
 	struct _i2c_m_msg       msg;
@@ -65,7 +65,7 @@ static int32_t i2c_m_sync_read(struct io_descriptor *io, uint8_t *buf, const uin
 /**
  * \brief Sync version of I2C I/O write
  */
-static int32_t i2c_m_sync_write(struct io_descriptor *io, const uint8_t *buf, const uint16_t n)
+int32_t i2c_m_sync_write(struct io_descriptor *io, const uint8_t *buf, const uint16_t n)
 {
 	struct i2c_m_sync_desc *i2c = CONTAINER_OF(io, struct i2c_m_sync_desc, io);
 	struct _i2c_m_msg       msg;

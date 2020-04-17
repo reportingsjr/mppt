@@ -3,30 +3,42 @@
 
 #include <atmel_start.h>
 #include "ina233.h"
+#include "ssd1306_oled.h"
 
+extern const unsigned char arial_8ptBitmaps[];
+extern const unsigned char charMap[96];
+extern const unsigned int arial_8ptDescriptors[96][3];
+
+extern const unsigned char courierNew_16ptBitmaps[];
+extern const unsigned int courierNew_16ptDescriptors[96][3];
+
+extern const unsigned char freestyleScript_22ptBitmaps[];
+extern const unsigned int freestyleScript_22ptDescriptors[96][3];
+
+extern const unsigned char kristenITC_14ptBitmaps[];
+extern const unsigned int kristenITC_14ptDescriptors[96][3];
 
 int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
 
-	//pwm_set_parameters(&PWM_0, 10, 80);
-	//pwm_enable(&PWM_0);
-
+	i2c_m_sync_set_baudrate(&I2C_0, 0, 8000000);
 	i2c_m_sync_enable(&I2C_0);
-
 	delay_init(SysTick);
+
 
 	gpio_set_pin_level(yellow_led, true);
 	gpio_set_pin_level(green_led, false);
 
-	// TODO: When Nick completes the UI part uncomment this and fill in correct I2C address
-	// uint8_t ui_address = 0x42;
-
-	// Wait for 100ms after start up to enable to FET driver to make sure the 5V rail is fully powered up
+	// Wait for 100ms after start up to let things settle
 	delay_ms(100);
-	// enable the FET driver
-	//gpio_set_pin_level(fet_enable, true);
+
+	init_oled();
+	oled_setFont(arial_8ptBitmaps, arial_8ptDescriptors,96, charMap, 5);
+
+	// enable SMPS
+	gpio_set_pin_level(fet_enable, true);
 
 	// 3.2768A gives a resolution of 100uA per bit
 	// current_lsb = 0.0001
@@ -40,12 +52,34 @@ int main(void)
 	float current_power = 0;
 	uint8_t pwm_value = 10;
 
-	while (1) {
-		// Read the current and voltage of the solar panel and multiply to get power 
-		/*float current = get_current(0x40, 0.0001);
-		float voltage = get_voltage(0x40);
-		current_power = current*voltage;
+	uint8_t x = 0;
+	uint8_t y = 0;
 
+	while (1) {
+		oled_clear();
+		// Read the current and voltage of the solar panel and multiply to get power 
+		float input_current = get_current(0x40, 0.0001);
+		float input_voltage = get_voltage(0x40);
+		current_power = input_current*input_voltage;
+		oled_printf(48,3, "Input");
+		oled_printf(0,16, "Voltage %dmV", (int) (input_voltage*1000));
+		oled_printf(0,32, "Current %dmA", (int) (input_current*1000));
+		oled_printf(0,48, "Power   %dmW", (int) (current_power*1000));
+		oled_update();
+		delay_ms(3000);
+
+		oled_clear();
+		// Read the current and voltage of the solar panel and multiply to get power 
+		float output_current = get_current(0x41, 0.0001);
+		float output_voltage = get_voltage(0x41);
+		current_power = output_current*output_voltage;
+		oled_printf(42,3, "Output");
+		oled_printf(0,16, "Voltage %dmV", (int) (output_voltage*1000));
+		oled_printf(0,32, "Current %dmA", (int) (output_current*1000));
+		oled_printf(0,48, "Power   %dmW", (int) (current_power*1000));
+		oled_update();
+		delay_ms(3000);
+		/*
 		if(current_power-previous_power > 0) {
 			// measured power is greater than the previous, continue moving in same direction
 			if(increase_output_resistance) {
@@ -88,20 +122,12 @@ int main(void)
 				}
 			}
 		}
-		
-		// update buck converter PWM now that the value has changed
-		pwm_set_parameters(&PWM_0, 160, pwm_value);
 
 		previous_power = current_power;
 
-		// TODO: When Nick completes the UI part uncomment this to send data over via I2C
-		//i2c_m_sync_set_slaveaddr(&I2C_0, ui_address, I2C_M_SEVEN);
-		//io_write(I2C_0_io, (uint8_t *)current_power), 1;
 		*/
+
 		gpio_toggle_pin_level(yellow_led);
 		gpio_toggle_pin_level(green_led);
-		// Add a small delay to limit possible oscillations and let things settle
-		delay_ms(1000);
 	}
 }
-

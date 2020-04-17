@@ -58,6 +58,10 @@ struct i2c_m_sync_desc {
 	uint16_t                  slave_addr;
 };
 
+int32_t i2c_m_sync_read(struct io_descriptor *io, uint8_t *buf, const uint16_t n);
+
+int32_t i2c_m_sync_write(struct io_descriptor *io, const uint8_t *buf, const uint16_t n);
+
 /**
  * \brief Initialize synchronous I2C interface
  *
